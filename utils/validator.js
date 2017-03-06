@@ -30,7 +30,7 @@ validator.validateRedirectingObject = function (redirectingObject, callback) {
 
     //check exists and validate short url
     var shortUrl = redirectingObject.shortUrl;
-    if (shortUrl) {
+    if (shortUrl && isValidLongUrl) {
         //check length
         if (shortUrl.length <= SHORT_URL_MAX_LENGTH) {
             //check unique
@@ -40,7 +40,7 @@ validator.validateRedirectingObject = function (redirectingObject, callback) {
             callback(result);
         }
     }
-    else if (isValidLongUrl) {
+    else if (!shortUrl && isValidLongUrl) {
         //if all ok but hasn't short  url - generate unique short url and save pair
         redirectingModel.generateUniqueShortUrl(redirectingObject, result, callback);
     } else {
@@ -61,6 +61,7 @@ function isValidUrl(url) {
     try {
         var res = request('GET', url);
         result = res.statusCode !== 404;
+        console.log(res.statusCode);
     } catch (e) {
         console.log(e)
     }

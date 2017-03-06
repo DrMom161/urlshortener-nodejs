@@ -18,6 +18,8 @@ angular.module('urlShortener', [])
                 }
             })
             .then(function (response) {
+                $scope.successMessage = '';
+                $scope.errorMessage = '';
                 if (response.data.hasError === false) {
                     $scope.successMessage = location.origin + '/' + response.data.data.shortUrl;
                 } else {
