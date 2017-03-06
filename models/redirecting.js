@@ -2,7 +2,7 @@ var redirecting = {};
 var MongoClient = require('mongodb');
 
 // Connection URL
-var url = 'mongodb://localhost:27017/urlshortener';
+var url = 'mongodb://urlshortener:qwerty1@ds119750.mlab.com:19750/heroku_t9dcvm1f';
 /**
  * Fetch redirecting object by shortUrl
  * @param shortUrl
@@ -11,6 +11,7 @@ var url = 'mongodb://localhost:27017/urlshortener';
  */
 redirecting.getByShortUrl = function (shortUrl, callback) {
     MongoClient.connect(url, function (err, db) {
+        console.log(err);
         var collection = db.collection('redirecting');
         collection.findOne({shortUrl: shortUrl}, function (err, redirectingObject) {
             callback(redirectingObject);
