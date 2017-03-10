@@ -31,7 +31,7 @@ router.post('/create_short_url', function (req, res) {
             var redirectingModel = require('../models/redirecting');
             redirectingModel.save(redirectingObject, function (redirectingObject) {
                 result.hasError = false;
-                result.data = {shortUrl: redirectingObject.shortUrl};
+                result.data = {shortUrl: req.protocol + '://' + req.get('host') + '/' +redirectingObject.shortUrl};
                 redirecting.printJson(res, result);
             });
 
