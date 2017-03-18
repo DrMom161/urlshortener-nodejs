@@ -1,5 +1,5 @@
 # urlshortener-nodejs
-The test project that realizes functionality of the substitution of long URLs to short 
+The test project that realizes API functionality of the substitution of long URLs to short 
 
 ##Install##
 
@@ -11,7 +11,7 @@ The test project that realizes functionality of the substitution of long URLs to
     > npm install
 4. Start web server with this code
 
-5. Open site in your browser
+5. Use your front-end with this api (example, https://github.com/DrMom161/urlshortener-angular-part)
 
 
 ##Usage##
@@ -22,4 +22,6 @@ Submit form.
 Copy url from from success message and share it to friends.
 
 ##Demo##
-https://obscure-beyond-70161.herokuapp.com/angular/
+API: https://obscure-beyond-70161.herokuapp.com
+
+Front-end: https://pipy-vol.000webhostapp.com/
