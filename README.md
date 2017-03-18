@@ -15,11 +15,16 @@ The test project that realizes API functionality of the substitution of long URL
 
 
 ##Usage##
-Fill form fields:
-  -long url for redirecting (required)
-  -desired short url (optional)
-Submit form.
-Copy url from from success message and share it to friends.
+###Create new short url
+Use http **POST** request to **"/create_short_url"** for creating new short url
+
+**Params:**
+* **shortUrl** - (string) desired short url, max length - 10
+     
+* **longUrl** - (string) link for redirecting
+
+###Use short url##
+Use http **GET** request to **"/{YOUR_SHORT_URL}"**
 
 ##Demo##
 API: https://obscure-beyond-70161.herokuapp.com
