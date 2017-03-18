@@ -1,5 +1,5 @@
 var redirecting = {};
-
+var frontSiteUrl = 'https://pipy-vol.000webhostapp.com';
 /**
  * Redirect to url or show 404
  * @param res - response object
@@ -9,18 +9,16 @@ redirecting.redirectTo = function (res, url) {
     if (url) {
         res.redirect(301, url);
     } else {
-        redirecting.show404(res, 'Short url does not exist');
+        redirecting.showMainPage(res);
     }
 };
 
 /**
- * Show 404 with message
+ * Show main page (front part) if short url does not exist
  * @param res - response object
- * @param message
  */
-redirecting.show404 = function (res, message) {
-    res.status(404);
-    res.render('404', { message: message });
+redirecting.showMainPage = function (res) {
+    res.redirect(frontSiteUrl);
 };
 
 /**
