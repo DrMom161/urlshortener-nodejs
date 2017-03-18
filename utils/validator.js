@@ -18,13 +18,13 @@ validator.validateRedirectingObject = function (redirectingObject, callback) {
 
     //check long url exists
     if (!redirectingObject.longUrl) {
-        result.errors.push('"Long url" can not be empty.');
+        result.errors.push('empty_long_url');
         isValidLongUrl = false;
     }
     //check long url exists in www
     isValidUrl(redirectingObject.longUrl, function (isValid) {
         if (!isValid) {
-            result.errors.push('"Long url" must be valid url.');
+            result.errors.push('invalid_long_url');
             isValidLongUrl = false;
         }
         var redirectingModel = require('../models/redirecting');
@@ -37,7 +37,7 @@ validator.validateRedirectingObject = function (redirectingObject, callback) {
                 //check unique
                 redirectingModel.checkExists(redirectingObject, result, callback);
             } else {
-                result.errors.push('"Short url" length can not be more then 10 symbols.');
+                result.errors.push('to_long_short_url');
                 callback(result);
             }
         }

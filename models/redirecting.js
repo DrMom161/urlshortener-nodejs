@@ -44,8 +44,7 @@ redirecting.checkExists = function (redirectingObject, result, callback) {
         collection.findOne({shortUrl: redirectingObject.shortUrl}, function (err, savedRedirectingObject) {
             //if exists - add error
             if (savedRedirectingObject) {
-                var xssFilters = require('xss-filters');
-                result.errors.push('Short url "' + xssFilters.inHTMLData(redirectingObject.shortUrl) + '" already exists.')
+                result.errors.push('is_exists_short_url')
             } else {
                 result.hasError = false;
             }
