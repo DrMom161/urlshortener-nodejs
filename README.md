@@ -1,7 +1,7 @@
-# urlshortener-nodejs
+# urlshortener-nodejs #
 The test project that realizes API functionality of the substitution of long URLs to short 
 
-##Install##
+## Install ##
 
 1. Clone or download git repository
 
@@ -14,8 +14,8 @@ The test project that realizes API functionality of the substitution of long URL
 5. Use your front-end with this api (example, https://github.com/DrMom161/urlshortener-angular-part)
 
 
-##Usage##
-###Create new short url
+## Usage ##
+### Create new short url ###
 Use http **POST** request to **"/create_short_url"** for creating new short url
 
 **Params:**
@@ -23,10 +23,10 @@ Use http **POST** request to **"/create_short_url"** for creating new short url
      
 * **longUrl** - (string) link for redirecting
 
-###Use short url##
+### Use short url ##
 Use http **GET** request to **"/{YOUR_SHORT_URL}"**
 
-##Demo##
+## Demo ##
 API: https://obscure-beyond-70161.herokuapp.com
 
 Front-end: https://pipy-vol.000webhostapp.com/
