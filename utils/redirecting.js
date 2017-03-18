@@ -7,7 +7,7 @@ var redirecting = {};
  */
 redirecting.redirectTo = function (res, url) {
     if (url) {
-        res.redirect(url);
+        res.redirect(301, url);
     } else {
         redirecting.show404(res, 'Short url does not exist');
     }
