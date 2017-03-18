@@ -11,7 +11,6 @@ var url = 'mongodb://urlshortener:qwerty1@ds119750.mlab.com:19750/heroku_t9dcvm1
  */
 redirecting.getByShortUrl = function (shortUrl, callback) {
     MongoClient.connect(url, function (err, db) {
-        console.log(err);
         var collection = db.collection('redirecting');
         collection.findOne({shortUrl: shortUrl}, function (err, redirectingObject) {
             callback(redirectingObject);
@@ -87,10 +86,8 @@ function generateShortUrl() {
     for (var i = 0; i < urlLength; i++) {
         number = Math.floor(Math.random() * (charactersMaxIndex + 1));
         char = characters[Math.floor(Math.random() * (charactersMaxIndex + 1))];
-        console.log(charactersMaxIndex, number, char);
         url += char;
     }
-    console.log(url);
     return url;
 }
 

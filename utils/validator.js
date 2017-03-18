@@ -22,30 +22,32 @@ validator.validateRedirectingObject = function (redirectingObject, callback) {
         isValidLongUrl = false;
     }
     //check long url exists in www
-    if (!isValidUrl(redirectingObject.longUrl)) {
-        result.errors.push('"Long url" must be valid url.');
-        isValidLongUrl = false;
-    }
-    var redirectingModel = require('../models/redirecting');
+    isValidUrl(redirectingObject.longUrl, function (isValid) {
+        if (!isValid) {
+            result.errors.push('"Long url" must be valid url.');
+            isValidLongUrl = false;
+        }
+        var redirectingModel = require('../models/redirecting');
 
-    //check exists and validate short url
-    var shortUrl = redirectingObject.shortUrl;
-    if (shortUrl && isValidLongUrl) {
-        //check length
-        if (shortUrl.length <= SHORT_URL_MAX_LENGTH) {
-            //check unique
-            redirectingModel.checkExists(redirectingObject, result, callback);
+        //check exists and validate short url
+        var shortUrl = redirectingObject.shortUrl;
+        if (shortUrl && isValidLongUrl) {
+            //check length
+            if (shortUrl.length <= SHORT_URL_MAX_LENGTH) {
+                //check unique
+                redirectingModel.checkExists(redirectingObject, result, callback);
+            } else {
+                result.errors.push('"Short url" length can not be more then 10 symbols.');
+                callback(result);
+            }
+        }
+        else if (!shortUrl && isValidLongUrl) {
+            //if all ok but hasn't short  url - generate unique short url and save pair
+            redirectingModel.generateUniqueShortUrl(redirectingObject, result, callback);
         } else {
-            result.errors.push('"Short url" length can not be more then 10 symbols.');
             callback(result);
         }
-    }
-    else if (!shortUrl && isValidLongUrl) {
-        //if all ok but hasn't short  url - generate unique short url and save pair
-        redirectingModel.generateUniqueShortUrl(redirectingObject, result, callback);
-    } else {
-        callback(result);
-    }
+    });
 
 
 };
@@ -53,19 +55,18 @@ validator.validateRedirectingObject = function (redirectingObject, callback) {
 /**
  * Check url http headers
  * @param url
- * @return boolean
+ * @param callback
  */
-function isValidUrl(url) {
-    var request = require('sync-request'),
-        result = false;
+function isValidUrl(url, callback) {
+    var request = require('request');
     try {
-        var res = request('GET', url);
-        result = res.statusCode !== 404;
-        console.log(res.statusCode);
+        request(url, function (error, response) {
+            callback(response && response.statusCode !== 404);
+        });
     } catch (e) {
-        console.log(e)
+        console.log(e);
     }
-    return result;
+
 }
 
 module.exports = validator;

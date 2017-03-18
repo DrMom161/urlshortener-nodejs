@@ -26,7 +26,6 @@ router.post('/create_short_url', function (req, res) {
         longUrl: req.body.longUrl
     }
     validator.validateRedirectingObject(redirectingObject, function (result, redirectingObject) {
-        console.log(result, redirectingObject);
         if (result.hasError === false) {
             var redirectingModel = require('../models/redirecting');
             redirectingModel.save(redirectingObject, function (redirectingObject) {
